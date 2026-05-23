@@ -1,32 +1,51 @@
 import './style.css'
-const burgerBtn: HTMLButtonElement = document.querySelector('#burgerBtn') as HTMLButtonElement;
-const flexBtns: HTMLDivElement = document.querySelector('#flexBtns') as HTMLDivElement;
-const szoveg: string = `<a href="index.html"> <div class="px-4 flex items-center gap-2"> <h1>Kezdőlap</h1>
-<img src="src/assets/homeicon.png" alt="home" class="w-10"> </div></a><a href="kapcsolat.html" target="_blank"><div class="px-4 flex items-center gap-2"><h1>Kapcsolat</h1>
-<img src="src/assets/contacticon.png" alt="home" class="w-10"></div></a><button type="button" class="cursor-pointer border-2 rounded-4xl mx-6"><img src="src/assets/cart.png" alt="Kosár" class="w-12"></button>"`
 
-// burgerBtn.addEventListener('click', ()=>{
-//     if (flexBtns.classList.contains("hidden")) {
-//         flexBtns.classList.remove("hidden");
-//         console.log("removed");
-        
-//     }
-//     else{
-//         flexBtns.classList.add("hidden");
-//         console.log("added");
-        
-//     }
-burgerBtn.addEventListener('click', ()=>{
-    if(flexBtns.innerHTML==szoveg){
-        flexBtns.innerHTML=""
-        console.log("siker");
-        
-    }
-    else{
-        flexBtns.innerHTML==szoveg
-        console.log("szoveg");
-        console.log(flexBtns.innerHTML);
-        
-        
-    }
-})
+const burgerBtn = document.querySelector('#burgerBtn') as HTMLButtonElement | null;
+const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
+let isIn: boolean = false;
+
+const szoveg = `
+          <div class="flex justify-end mx-8 mb-2"> <!-- Kosár gomb -->
+            <div class="border-2 w-17.5 rounded-4xl cursor-pointer hover:bg-[#36a87b]">
+              <img src="src/assets/cart.png" alt="Kosár" >
+            </div>
+          </div>
+              <div class="rounded-2xl hover:bg-[#36a87b] mb-2">  <!-- Home gomb -->
+                <a href="index.html">
+                  <div class="px-4 flex gap-2">
+                    <h1>Kezdőlap</h1>
+                    <img src="src/assets/homeicon.png" alt="home" class="w-10">
+                  </div>
+                </a>
+              </div>
+            <div class="rounded-2xl hover:bg-[#36a87b]"> <!-- Contact gomb -->
+              <a href="kapcsolat.html" target="_blank">
+                <div class="px-4 flex items-center gap-2">
+                  <h1>Kapcsolat</h1>
+                  <img src="src/assets/contacticon.png" alt="contact" class="w-10">
+                </div>
+              </a>
+            </div>
+`.trim();
+
+if (!burgerBtn || !flexBtns) {
+     console.log("Nincsenek meg!");
+    
+} else {
+    burgerBtn.addEventListener('click', () => {
+        if (!isIn) {
+            (document.querySelector('#burger') as HTMLImageElement).src = "src/assets/close.png"
+            flexBtns.classList.add("mb-4");
+            flexBtns.innerHTML = szoveg;
+            isIn=true;
+            console.log("added");
+            
+        } else {
+            (document.querySelector('#burger') as HTMLImageElement).src = "src/assets/burger.png"
+            flexBtns.classList.remove("mb-4");
+            flexBtns.innerHTML = "";
+            console.log("removed");
+            isIn=false;
+        }
+    });
+ }

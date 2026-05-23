@@ -17,27 +17,27 @@
         </a>
         <div class="hidden md:flex px-4 items-center gap-4"> <!-- Gombok -->
           <a href="index.html">
-            <div class="px-4 flex items-center gap-2">
+            <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
               <h1>Kezdőlap</h1>
               <img src="src/assets/homeicon.png" alt="home" class="w-10">
             </div>
           </a>
           <a href="kapcsolat.html" target="_blank">
-            <div class="px-4 flex items-center gap-2">
+            <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
               <h1>Kapcsolat</h1>
               <img src="src/assets/contacticon.png" alt="home" class="w-10">
             </div>
           </a>
-          <button type="button" class="cursor-pointer border-2 rounded-4xl mx-6"><img src="src/assets/cart.png" alt="Kosár" class="w-12"></button>
+          <button type="button" class="cursor-pointer border-2 rounded-4xl mx-6 hover:bg-[#36a87b]"><img src="src/assets/cart.png" alt="Kosár" class="w-12"></button>
         </div>
-        <div> <!-- Flex Gombok -->
-          <button type="button" class="m-10 cursor-pointer" id="burgerBtn">
-            <img src="src/assets/burger.png" alt="burgericon" class="w-15">
-          </button>
-            <div id="flexBtns">
-            </div>
-          </div>
+        <button type="button" class="m-10 cursor-pointer md:hidden" id="burgerBtn">
+          <img src="src/assets/burger.png" alt="burgericon" class="w-15 h-15" id="burger">
+        </button>
       </div>
+      <div class="flex md:hidden text-white text-xl font-bold justify-end text-right"> <!-- Flex Gombok -->
+          <div id="flexBtns" class=" mr-5">
+          </div>
+        </div>
     </nav>
     <script type="module" src="/src/main.ts"></script>
   </body>
