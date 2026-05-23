@@ -1,8 +1,20 @@
 import './style.css'
+import data from "./data.ts";
+import { Album } from './album.ts';
+
+
+const albumok: Album[] = Album.LoadData(data);
 
 const burgerBtn = document.querySelector('#burgerBtn') as HTMLButtonElement | null;
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
+const albumTB: HTMLTableElement = document.querySelector('#tablazatBody') as HTMLTableElement;
 let isIn: boolean = false;
+
+console.log(albumok.length);
+
+
+TableLoad(albumok, albumTB)
+
 
 const szoveg = `
           <div class="flex justify-end mx-8 mb-2"> <!-- Kosár gomb -->
@@ -48,4 +60,18 @@ if (!burgerBtn || !flexBtns) {
             isIn=false;
         }
     });
+ }
+
+ function TableLoad(list:Album[],table:HTMLTableElement):void{
+  list.forEach(a => {
+    let tr:HTMLTableRowElement=document.createElement('tr')
+    let Acells : string=`<td>${a.artist}</td>`+
+                              `<td>${a.record_name}</td>`+
+                              `<td>${a.year}</td>`+
+                              `<td>${a.publisher}</td>`+
+                              `<td>${a.price}</td>` +
+                              `<td>Kosárba</td>`
+    tr.innerHTML = Acells;
+    table.appendChild(tr);
+  });
  }
