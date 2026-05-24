@@ -3,18 +3,22 @@ import data from "./data.ts";
 import { Album } from './album.ts';
 
 const currencySLC :HTMLSelectElement = document.querySelector('#currency') as HTMLSelectElement;
+const sortingSLC :HTMLSelectElement = document.querySelector('#sorting') as HTMLSelectElement;
 const albumok: Album[] = Album.LoadData(data);
 const kosarList: Album[] = [];
-
-
 const burgerBtn = document.querySelector('#burgerBtn') as HTMLButtonElement | null;
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
 const albumTB: HTMLTableElement = document.querySelector('#tablazatBody') as HTMLTableElement;
 let isIn: boolean = false;
 let selectedCurrency: string = "HUF"
-let writtenCurrency:string = "Ft";
+let writtenCurrency: string = "Ft";
+let sortedList: Album[] = [...albumok];
 
-console.log(albumok.length);
+sortingSLC.addEventListener('change',()=>{
+  sortedList = [...albumok];
+  Sort(sortedList,sortingSLC.value)
+  console.log(albumok);
+})
 
 
 currencySLC.addEventListener('change',()=>{
@@ -23,23 +27,28 @@ currencySLC.addEventListener('change',()=>{
     case "HUF":
       writtenCurrency = "Ft";
       break;
-      case "EUR":
-        writtenCurrency = "€";
-        break;
-        case "GBP":
-          writtenCurrency = "£";
-          break;
-          case "USD":
-            writtenCurrency = "$";
-            break;
-          }
-          albumTB.innerHTML=""
-          TableLoad(albumok, albumTB, Album.kosarba,Album.PriceConvert)
-          
-        })
+    case "EUR":
+      writtenCurrency = "€";
+      break;
+    case "GBP":
+      writtenCurrency = "£";
+      break;
+    case "USD":
+      writtenCurrency = "$";
+      break;
+  }
+  // if (currencySLC.value!="HUF") {
+  //   (document.querySelector('html')as HTMLHtmlElement).lang="en";
+  //   (document.querySelector('#home')as HTMLHeadElement).innerHTML="Home";
+  //   console.log("halo");
+    
+  // }
+  // else{
+  //   (document.querySelector('html')as HTMLHtmlElement).lang="hu"
+  // }
+  TableLoad(albumok, albumTB, Album.kosarba,Album.PriceConvert)
+})
 TableLoad(albumok, albumTB, Album.kosarba,Album.PriceConvert)
-console.log(writtenCurrency);
-console.log();
 
 
 const szoveg = `
@@ -89,6 +98,7 @@ if (!burgerBtn || !flexBtns) {
  }
 
  function TableLoad(list: Album[], table: HTMLTableElement, callBackKosar: (index: number, kList: Album[], list: Album[]) => void, callBackCurrency: (price:number,currency:string)=> number): void {
+    table.innerHTML="";
     list.forEach((a, currentIndex) => {
     let currentPrice:number=Math.round(callBackCurrency(a.price,selectedCurrency))
     let tr: HTMLTableRowElement = document.createElement('tr')
@@ -104,3 +114,39 @@ if (!burgerBtn || !flexBtns) {
      callBackKosar(currentIndex, kosarList, list)
   });
 }
+function Sort(list:Album[], sortBy:string):void{
+  switch (sortBy) {
+    case "AZ":
+      list.sort((a,b) => a.artist.localeCompare(b.artist));
+      TableLoad(list, albumTB, Album.kosarba,Album.PriceConvert);
+      break;
+    case "ZA":
+      list.sort((b,a) => a.artist.localeCompare(b.artist));
+      TableLoad(list, albumTB, Album.kosarba,Album.PriceConvert);
+      break;
+    case "KN":
+      list.sort((a,b) => a.year - b.year);
+      TableLoad(list, albumTB, Album.kosarba,Album.PriceConvert);
+      break;
+
+    case "KCS":
+      list.sort((a,b) => b.year - a.year);
+      TableLoad(list, albumTB, Album.kosarba,Album.PriceConvert);
+      break;
+
+    case "AN":
+      list.sort((a,b) => a.price - b.price);
+      TableLoad(list, albumTB, Album.kosarba,Album.PriceConvert);
+      break;
+
+    case "ACS":
+      list.sort((a,b) => b.price - a.price);
+      TableLoad(list, albumTB, Album.kosarba,Album.PriceConvert);
+      break;
+    default:
+      TableLoad(albumok, albumTB, Album.kosarba,Album.PriceConvert);
+      break;
+
+  }
+}
+console.log(albumok);

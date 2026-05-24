@@ -18,7 +18,7 @@
         <div class="hidden md:flex px-4 items-center gap-4"> <!-- Gombok -->
           <a href="index.html">
             <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
-              <h1>Kezdőlap</h1>
+              <h1 id="Home">Kezdőlap</h1>
               <img src="src/assets/homeicon.png" alt="home" class="w-10">
             </div>
           </a>
@@ -29,7 +29,7 @@
             </div>
           </a>
             <form>
-              <select id="currency" class="block w-full px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+              <select id="currency" class="px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
                 <option value="HUF">HUF Ft</option>
                 <option value="USD">USD $</option>
                 <option value="EUR">EUR €</option>
@@ -47,6 +47,39 @@
           </div>
         </div>
     </nav>
+    <div class="flex justify-between">
+      <div>
+        <div class="flex">
+          <form>
+            <select id="sorting" class="w-[70%] m-5 px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+              <option value="Valassz">Szűrés</option>
+              <option value="AZ">A-Z</option>
+              <option value="ZA">Z-A</option>
+              <option value="KN">Kiadás éve szerint növekvő</option>
+              <option value="KCS">Kiadás éve szerint csökkenő</option>
+              <option value="AN">Ár szerint növekvő</option>
+              <option value="ACS">Ár szerint csökkenő</option>
+            </select>
+          </form>
+        </div>
+      </div>
+      <div class="">
+        <input type="text" name="search"  id="search" placeholder="Keresés..." class="size-full p-3 border rounded-2xl">
+      </div>
+        <div class="flex">
+          <form>
+            <select id="sorting" class="w-[50%] px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+              <option value="Valassz">Rendezés</option>
+              <option value="AZ">A-Z</option>
+              <option value="ZA">Z-A</option>
+              <option value="KN">Kiadás éve szerint növekvő</option>
+              <option value="KCS">Kiadás éve szerint csökkenő</option>
+              <option value="AN">Ár szerint növekvő</option>
+              <option value="ACS">Ár szerint csökkenő</option>
+            </select>
+          </form>
+        </div>
+    </div>
     <div class="m-4 flex">
       <div class="border-collapse table-auto md:table-fixed flex-12">
         <table class="w-[95%]" >
@@ -56,6 +89,9 @@
             <th class="p-2 text-left font-medium border border-gray-200 table-cell">Kiadás éve</th>
             <th class="p-2 text-left font-medium border border-gray-200 table-cell">Kiadó</th>
             <th class="p-2 text-left font-medium border border-gray-200 table-cell">Ár</th>
+            <th class="p-2 w-35 text-left font-medium border border-gray-200 table-cell">Borító</th>
+            <th class="bg-[#A3E7FC] "></th>
+            <th class="p-2 text-left font-medium table-cell bg-[#A3E7FC]">
           </thead>
           <tbody id="tablazatBody" class="">
           </tbody>
