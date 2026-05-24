@@ -19,6 +19,17 @@ class Album{
         });
         return albumok;
     }
+    static kosarba(index:number, kList:Album[], list:Album[]):void {
+        const k = document.querySelector(`#kosar${index}`) as HTMLTableCellElement;
+        if (!k) console.log("Nincs kosar element!");
+        else{
+            k.addEventListener('click', ()=>{
+                kList.push(list[index])
+                console.log(`${list[index].artist} added`);
+                
+        })
+        }
+        }
 }
 
 export {Album}

@@ -4,6 +4,8 @@ import { Album } from './album.ts';
 
 
 const albumok: Album[] = Album.LoadData(data);
+const kosarList: Album[] = [];
+
 
 const burgerBtn = document.querySelector('#burgerBtn') as HTMLButtonElement | null;
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
@@ -12,9 +14,7 @@ let isIn: boolean = false;
 
 console.log(albumok.length);
 
-
-TableLoad(albumok, albumTB)
-
+TableLoad(albumok, albumTB, Album.kosarba)
 
 const szoveg = `
           <div class="flex justify-end mx-8 mb-2"> <!-- Kosár gomb -->
@@ -62,16 +62,17 @@ if (!burgerBtn || !flexBtns) {
     });
  }
 
- function TableLoad(list:Album[],table:HTMLTableElement):void{
-  list.forEach(a => {
-    let tr:HTMLTableRowElement=document.createElement('tr')
-    let Acells : string=`<td>${a.artist}</td>`+
-                              `<td>${a.record_name}</td>`+
-                              `<td>${a.year}</td>`+
-                              `<td>${a.publisher}</td>`+
-                              `<td>${a.price}</td>` +
-                              `<td>Kosárba</td>`
-    tr.innerHTML = Acells;
-    table.appendChild(tr);
+ function TableLoad(list: Album[], table: HTMLTableElement, callBackKosar: (index: number, kList: Album[], list: Album[]) => void): void {
+   list.forEach((a, currentIndex) => {
+     let tr: HTMLTableRowElement = document.createElement('tr')
+     let Acells : string=`<td class="p-2">${a.artist}</td>`+
+                               `<td class="p-2">${a.record_name}</td>`+
+                               `<td class="p-2">${a.year}</td>`+
+                               `<td class="p-2">${a.publisher}</td>`+
+                               `<td class="p-2">${a.price}</td>` +
+                               `<td class="p-2 cursor-pointer" id="kosar${currentIndex}">Kosárba</td>`
+     tr.innerHTML = Acells;
+     table.appendChild(tr);
+     callBackKosar(currentIndex, kosarList, list)
   });
- }
+}
