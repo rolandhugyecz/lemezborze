@@ -4,6 +4,7 @@ class Album{
     year: number;
     publisher: string;
     price: number;
+    imgurl:string;
     constructor(row: string){
         let slices:string[] = row.split(";")
         this.artist = slices[0];
@@ -11,6 +12,7 @@ class Album{
         this.year = Number(slices[2]);
         this.publisher = slices[3];
         this.price = Number(slices[4]);
+        this.imgurl = slices[5];
     }
         static LoadData(data: string[]): Album[]{
         let albumok: Album[] = [];
@@ -30,6 +32,20 @@ class Album{
         })
         }
         }
+    static PriceConvert(price:number,currency:string){
+        switch (currency) {
+            case "HUF":
+                return price;
+            case "EUR":
+                return price*0.0028;
+            case "USD":
+                return price*0.0032;
+            case "GBP":
+                return price*0.0024;
+            default:
+                return 0;
+        }
+    }
 }
 
 export {Album}

@@ -2,7 +2,7 @@ import './style.css'
 import data from "./data.ts";
 import { Album } from './album.ts';
 
-
+const currencySLC :HTMLSelectElement = document.querySelector('#currency') as HTMLSelectElement;
 const albumok: Album[] = Album.LoadData(data);
 const kosarList: Album[] = [];
 
@@ -11,10 +11,36 @@ const burgerBtn = document.querySelector('#burgerBtn') as HTMLButtonElement | nu
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
 const albumTB: HTMLTableElement = document.querySelector('#tablazatBody') as HTMLTableElement;
 let isIn: boolean = false;
+let selectedCurrency: string = "HUF"
+let writtenCurrency:string = "Ft";
 
 console.log(albumok.length);
 
-TableLoad(albumok, albumTB, Album.kosarba)
+
+currencySLC.addEventListener('change',()=>{
+  selectedCurrency = currencySLC.value;
+  switch (currencySLC.value) {
+    case "HUF":
+      writtenCurrency = "Ft";
+      break;
+      case "EUR":
+        writtenCurrency = "€";
+        break;
+        case "GBP":
+          writtenCurrency = "£";
+          break;
+          case "USD":
+            writtenCurrency = "$";
+            break;
+          }
+          albumTB.innerHTML=""
+          TableLoad(albumok, albumTB, Album.kosarba,Album.PriceConvert)
+          
+        })
+TableLoad(albumok, albumTB, Album.kosarba,Album.PriceConvert)
+console.log(writtenCurrency);
+console.log();
+
 
 const szoveg = `
           <div class="flex justify-end mx-8 mb-2"> <!-- Kosár gomb -->
@@ -62,16 +88,18 @@ if (!burgerBtn || !flexBtns) {
     });
  }
 
- function TableLoad(list: Album[], table: HTMLTableElement, callBackKosar: (index: number, kList: Album[], list: Album[]) => void): void {
-   list.forEach((a, currentIndex) => {
-     let tr: HTMLTableRowElement = document.createElement('tr')
-     let Acells : string=`<td class="p-2">${a.artist}</td>`+
-                               `<td class="p-2">${a.record_name}</td>`+
-                               `<td class="p-2">${a.year}</td>`+
-                               `<td class="p-2">${a.publisher}</td>`+
-                               `<td class="p-2">${a.price}</td>` +
-                               `<td class="p-2 cursor-pointer" id="kosar${currentIndex}">Kosárba</td>`
-     tr.innerHTML = Acells;
+ function TableLoad(list: Album[], table: HTMLTableElement, callBackKosar: (index: number, kList: Album[], list: Album[]) => void, callBackCurrency: (price:number,currency:string)=> number): void {
+    list.forEach((a, currentIndex) => {
+    let currentPrice:number=Math.round(callBackCurrency(a.price,selectedCurrency))
+    let tr: HTMLTableRowElement = document.createElement('tr')
+    let Acells : string=`<td class="p-2">${a.artist}</td>`+
+                              `<td class="p-2">${a.record_name}</td>`+
+                              `<td class="p-2">${a.year}</td>`+
+                              `<td class="p-2">${a.publisher}</td>`+
+                              `<td class="p-2">${currentPrice} ${writtenCurrency}</td>` +
+                              `<td class"p-2"><img src="${a.imgurl}" class="w-35 border-white border-2" alt=""></td>` +
+                              `<div class="p-4 pt-5 cursor-pointer text-center justify-center" id="kosar${currentIndex}"><img src="src/assets/add-to-bag.png" class="w-20" alt="add-to-bag"></div>`
+    tr.innerHTML = Acells;
      table.appendChild(tr);
      callBackKosar(currentIndex, kosarList, list)
   });

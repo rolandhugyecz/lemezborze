@@ -28,6 +28,14 @@
               <img src="src/assets/contacticon.png" alt="home" class="w-10">
             </div>
           </a>
+            <form>
+              <select id="currency" class="block w-full px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+                <option value="HUF">HUF Ft</option>
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR €</option>
+                <option value="GBP">GBP £</option>
+              </select>
+            </form>
           <button type="button" class="cursor-pointer border-2 rounded-4xl mx-6 hover:bg-[#36a87b]"><img src="src/assets/cart.png" alt="Kosár" class="w-12"></button>
         </div>
         <button type="button" class="m-10 cursor-pointer md:hidden" id="burgerBtn">
@@ -40,9 +48,9 @@
         </div>
     </nav>
     <div class="m-4 flex">
-      <div class="border-collapse table-auto md:table-fixed flex-11">
-        <table class="w-[80%]" >
-          <thead class="table-auto md:table-header-group ">
+      <div class="border-collapse table-auto md:table-fixed flex-12">
+        <table class="w-[95%]" >
+          <thead class="table-auto md:table-header-group bg-[#bdafb3]">
             <th class="p-2 text-left font-medium border border-gray-200 table-cell">Előadó</th>
             <th class="p-2 text-left font-medium border border-gray-200 table-cell">Cím</th>
             <th class="p-2 text-left font-medium border border-gray-200 table-cell">Kiadás éve</th>
@@ -53,7 +61,6 @@
           </tbody>
         </table>
       </div>
-      <div class="flex-1"><h1>halo</h1></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

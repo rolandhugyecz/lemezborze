@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+#tablazatBody tr:nth-child(even) {
+  background-color: var(--color-gray-200);
+}
+
+#tablazatBody tr:nth-child(odd) {
+  background-color: var(--color-gray-300);
+}
+
+#tablazatBody tr:hover {
+  background-color: rgba(164, 168, 182, 0.815);
+}
