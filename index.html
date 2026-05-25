@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="hu">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lemezbörze</title>
-  </head>
-  <body class="bg-[#A3E7FC]">
+</head>
+<body class="bg-[#A3E7FC]">
     <nav class="bg-[#26C485] rounded-2xl m-2.5 sticky top-0 z-10">
       <div class="h-22 flex items-center justify-between text-white text-xl font-bold">
         <a href="index.html">
@@ -22,53 +22,64 @@
               <img src="src/assets/homeicon.png" alt="home" class="w-10">
             </div>
           </a>
-          <a href="kapcsolat.html" target="_blank">
+          <a href="kiadas.html">
+            <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
+              <h1 id="kiadas">Kiadás</h1>
+              <img src="src/assets/vinyl.png" alt="home" class="w-10">
+            </div>
+          </a>
+          <a href="#">
             <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
               <h1>Kapcsolat</h1>
               <img src="src/assets/contacticon.png" alt="home" class="w-10">
             </div>
           </a>
-            <form>
-              <select id="currency" class="px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
-                <option value="HUF">HUF Ft</option>
-                <option value="USD">USD $</option>
-                <option value="EUR">EUR €</option>
-                <option value="GBP">GBP £</option>
-              </select>
-            </form>
+             <div>
+               <form>
+                  <select id="currency" class="px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+                    <option value="HUF">HUF Ft</option>
+                    <option value="USD">USD $</option>
+                    <option value="EUR">EUR €</option>
+                    <option value="GBP">GBP £</option>
+                  </select>
+                </form>
+             </div>
           <button type="button" class="cursor-pointer border-2 rounded-4xl mx-6 hover:bg-[#36a87b]"><img src="src/assets/cart.png" alt="Kosár" class="w-12"></button>
         </div>
-        <button type="button" class="m-10 cursor-pointer md:hidden" id="burgerBtn">
-          <img src="src/assets/burger.png" alt="burgericon" class="w-15 h-15" id="burger">
-        </button>
+        <div class="flex md:hidden justify-between items-center">
+          <form>
+            <select id="currency2" class="px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+              <option value="HUF">HUF Ft</option>
+              <option value="USD">USD $</option>
+              <option value="EUR">EUR €</option>
+              <option value="GBP">GBP £</option>
+            </select>
+          </form>
+          </div>
+          <button type="button" class="mt-10 mb-10 mr-10 ml-3 cursor-pointer md:hidden" id="burgerBtn">
+            <img src="src/assets/burger.png" alt="burgericon" class="w-15 h-15" id="burger">
+          </button>
+        </div>
       </div>
       <div class="flex md:hidden text-white text-xl font-bold justify-end text-right"> <!-- Flex Gombok -->
           <div id="flexBtns" class=" mr-5">
           </div>
         </div>
     </nav>
-    <div class="flex justify-between">
-      <div>
-        <div class="flex">
-          <form>
-            <select id="sorting" class="w-[70%] m-5 px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
-              <option value="Valassz">Szűrés</option>
-              <option value="AZ">A-Z</option>
-              <option value="ZA">Z-A</option>
-              <option value="KN">Kiadás éve szerint növekvő</option>
-              <option value="KCS">Kiadás éve szerint csökkenő</option>
-              <option value="AN">Ár szerint növekvő</option>
-              <option value="ACS">Ár szerint csökkenő</option>
-            </select>
-          </form>
+    <div class="flex justify-between m-5">
+      <div class="flex">
+        <div>
+          <input type="text" name="search"  id="search" placeholder="Írd ide, mit keresel..." class="h-full w-xl p-3 border-2 rounded-2xl bg-[#A3E7FC] hover:bg-[#76a8b8]">
         </div>
-      </div>
-      <div class="">
-        <input type="text" name="search"  id="search" placeholder="Keresés..." class="size-full p-3 border rounded-2xl">
+        <div id="searchBTN" class="flex items-center mx-4 border-2 rounded-2xl p-2 bg-[#A3E7FC] hover:bg-[#76a8b8] hover:cursor-pointer">
+          <img src="src/assets/search.png" alt="searchpng" class="size-6 mx-2">
+          <input type="button" value="Keresés" class="hover:cursor-pointer size-full mx-2">
+        </div>
+
       </div>
         <div class="flex">
           <form>
-            <select id="sorting" class="w-[50%] px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+            <select id="sorting" class="h-full px-3 rounded-2xl bg-[#A3E7FC] hover:bg-[#76a8b8] py-2.5 border-2">
               <option value="Valassz">Rendezés</option>
               <option value="AZ">A-Z</option>
               <option value="ZA">Z-A</option>
