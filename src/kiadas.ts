@@ -1,9 +1,18 @@
 import './style.css';
+import data from './data.ts';
 
 const burgerBtn = document.querySelector(
   '#burgerBtn',
 ) as HTMLButtonElement | null;
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
+const kiadArtist: HTMLInputElement = document.querySelector('#kiadArtist') as HTMLInputElement;
+const kiadTitle: HTMLInputElement = document.querySelector('#kiadTitle') as HTMLInputElement;
+const kiadPublisher: HTMLInputElement = document.querySelector('#kiadPublisher') as HTMLInputElement;
+const kiadYear: HTMLInputElement = document.querySelector('#kiadYear') as HTMLInputElement;
+const kiadPrice: HTMLInputElement = document.querySelector('#kiadPrice') as HTMLInputElement;
+const kiadURL: HTMLInputElement = document.querySelector('#kiadURL') as HTMLInputElement;
+const kiadasBTN: HTMLDivElement = document.querySelector('#kiadasBTN') as HTMLDivElement;
+const torlesBTN: HTMLDivElement = document.querySelector('#torlesBTN') as HTMLDivElement;
 let isIn: boolean = false;
 
 const szoveg = `
