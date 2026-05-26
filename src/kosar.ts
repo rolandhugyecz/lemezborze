@@ -1,10 +1,23 @@
 import './style.css';
+import data from './data.ts';
+import { Album } from './album.ts';
 
+const kosarDiv:HTMLDivElement = document.querySelector("#kosarban") as HTMLDivElement;
 const burgerBtn = document.querySelector(
   '#burgerBtn',
 ) as HTMLButtonElement | null;
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
 let isIn: boolean = false;
+let kosarList: Album[] = [];
+
+const savedKosar = localStorage.getItem('kosar');
+if (!savedKosar) {
+  console.log('Nincs kosár!');
+} else {
+  kosarList = JSON.parse(savedKosar) as Album[];
+}
+
+kosarFeltolt()
 
 const szoveg = `
           <div class="flex justify-end mx-8 mb-2"> <!-- Kosár gomb -->
@@ -57,4 +70,15 @@ if (!burgerBtn || !flexBtns) {
     }
     console.log('changed');
   });
+
 }
+  function kosarFeltolt(): void {
+    kosarList.forEach(k => {
+      const div = document.createElement('div');
+      div.innerHTML = `          <div class="flex flex-row justify-center gap-10" id="kosarban">
+              <div class="text-5xl font-bold">${k.record_name}</div>
+            </div>`;
+      kosarDiv.appendChild(div);
+    });
+  }
+

@@ -12,7 +12,6 @@ const sortingSLC: HTMLSelectElement = document.querySelector(
   '#sorting',
 ) as HTMLSelectElement;
 const albumok: Album[] = Album.LoadData(data);
-const kosarList: Album[] = [];
 const burgerBtn = document.querySelector(
   '#burgerBtn',
 ) as HTMLButtonElement | null;
@@ -33,6 +32,15 @@ let sortedList: Album[] = [...albumok];
 let searchedList: Album[] = [];
 let isSorted: boolean = false;
 let isSearched: boolean = false;
+let kosarList: Album[] = [];
+
+const savedKosar = localStorage.getItem('kosar');
+if (!savedKosar) {
+  console.log('Nincs kosár!');
+} else {
+  kosarList = JSON.parse(savedKosar) as Album[];
+}
+
 
 searchBTN.addEventListener('click', () => {
   searchedList = [];
