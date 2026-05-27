@@ -10,8 +10,10 @@ const flexBtns: HTMLDivElement = document.querySelector('#flexBtns') as HTMLDivE
 const albumTB: HTMLTableElement = document.querySelector('#tablazatBody') as HTMLTableElement;
 const searchBTN: HTMLDivElement = document.querySelector('#searchBTN') as HTMLDivElement;
 const searchTXB: HTMLInputElement = document.querySelector('#search') as HTMLInputElement;
+const savedSLC: any = localStorage.getItem('selected');
+const savedCurrency: any = localStorage.getItem('currency');
 let isIn: boolean = false;
-let selectedCurrency: string = 'HUF';
+let selectedCurrency: any = 'HUF';
 let writtenCurrency: string = 'Ft';
 let sortedList: Album[] = [...albumok];
 let searchedList: Album[] = [];
@@ -19,6 +21,15 @@ let isSorted: boolean = false;
 let isSearched: boolean = false;
 let kosarList: Album[] = [];
 
+if (savedCurrency) {
+  writtenCurrency=savedCurrency;
+}
+
+if (savedSLC) {
+  selectedCurrency = savedSLC;
+  currencySLC.value=savedSLC;
+  currencySLCBurgered.value=savedSLC;
+}
 
 window.addEventListener('storage', ()=>{
   window.location.reload();
@@ -88,6 +99,7 @@ function currencyChange(list: Album[], SLC: HTMLSelectElement) {
       break;
   }
   TableLoad(list, albumTB, Album.kosarba, Album.PriceConvert);
+   localStorage.setItem('currency',writtenCurrency);
 }
 
 currencySLCBurgered.addEventListener('change', () => {
@@ -98,6 +110,8 @@ currencySLCBurgered.addEventListener('change', () => {
   } else {
     currencyChange(albumok, currencySLCBurgered);
   }
+  localStorage.setItem('selected',selectedCurrency);
+  localStorage.setItem('currency',writtenCurrency);
 });
 
 currencySLC.addEventListener('change', () => {
@@ -108,6 +122,8 @@ currencySLC.addEventListener('change', () => {
   } else {
     currencyChange(albumok, currencySLC);
   }
+  localStorage.setItem('selected',selectedCurrency);
+  localStorage.setItem('currency',writtenCurrency);
 });
 
 TableLoad(albumok, albumTB, Album.kosarba, Album.PriceConvert);

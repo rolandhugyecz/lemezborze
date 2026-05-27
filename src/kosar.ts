@@ -12,34 +12,37 @@ const curr:HTMLSpanElement = document.querySelector('#curr') as HTMLSpanElement;
 let isIn: boolean = false;
 let kosarList: Album[] = [];
 let kosarTartalom: Map<string, number> = new Map([]);
-let selectedCurrency: string = 'HUF';
-let writtenCurrency: string = 'Ft';
+let selectedCurrency: any = 'HUF';
+let writtenCurrency: any = 'Ft';
+const savedSLC: any = localStorage.getItem('selected');
+const savedCurrency: any = localStorage.getItem('currency');
 
 
+if (savedSLC) {
+  selectedCurrency = savedSLC;
+  currencySLC.value=savedSLC;
+  currencySLCBurgered.value=savedSLC;
+  console.log(selectedCurrency);
+  
+
+}
 
 if (currencySLCBurgered) {
   currencySLCBurgered.addEventListener('change', () => {
     currencyChange(currencySLCBurgered);
-    curr.innerHTML=writtenCurrency;
-    console.log(selectedCurrency);
-    
+    localStorage.setItem('selected',selectedCurrency);
   });
 }
+
 if (currencySLC) {
   currencySLC.addEventListener('change', () => {
     currencyChange(currencySLC);
-    curr.innerHTML=writtenCurrency;
-    console.log(selectedCurrency);
-
+    localStorage.setItem('selected',selectedCurrency);
   });
 }
 
-
-
 function currencyChange(SLC: HTMLSelectElement) {
   selectedCurrency = SLC.value;
-  console.log(selectedCurrency);
-  
   switch (SLC.value) {
     case 'HUF':
       writtenCurrency = 'Ft';
@@ -54,6 +57,8 @@ function currencyChange(SLC: HTMLSelectElement) {
       writtenCurrency = '$';
       break;
   }
+  localStorage.setItem('currency',writtenCurrency);
+  window.location.reload();
 }
 
 torlesBTN.addEventListener('click',()=>{
@@ -61,13 +66,12 @@ torlesBTN.addEventListener('click',()=>{
   localStorage.removeItem('kosar');
   kosarTartalom.clear();
   window.location.reload();
-  console.log(savedKosar);
-  
 })
 
 const savedKosar = localStorage.getItem('kosar');
 if (!savedKosar) {
   console.log('Nincs kosár!');
+  
 } else {
   kosarList = JSON.parse(savedKosar) as Album[];
 }
@@ -75,6 +79,7 @@ if (!savedKosar) {
 window.addEventListener('storage', ()=>{
   kosarDict();
   window.location.reload();
+  selectedCurrency = localStorage.getItem('select');
 })
 
 kosarDict();
@@ -134,18 +139,20 @@ function kosarFeltolt(): void {
     }
     const a:Album=kosarList[currentIndex];
     const div = document.createElement('div');
+    const currentPrice: number = Math.round(Album.PriceConvert((a.price*value),savedSLC));
+    console.log(`halohalohlao ${currentPrice}`);
+    console.log(savedSLC);
+    console.log(`converted basszadmeg :::: ${Math.round(Album.PriceConvert(currentPrice,savedSLC))}`);
     div.innerHTML = `<div class="flex flex-row justify-center gap-10" id="kosarban">
                     <div class="text-2xl"><b>${value} db </b> ${a.artist}: ${key}</div>
-                    <div class="text-2xl">Ár: ${Album.PriceConvert((a.price*value),selectedCurrency)}</div>
+                    <div class="text-2xl">Ár: ${currentPrice} ${savedCurrency}</div>
                     </div>`;
     kosarDiv.appendChild(div);
-    osszPenz += a.price*value;
-    console.log(`${a.price*value} added`);
+    osszPenz += Math.round(currentPrice);
+    console.log(`${currentPrice} added`);
     
   })
-  
-  osszPenzSpan.innerHTML=osszPenz.toString();
-  console.log(`${osszPenz} ${writtenCurrency}`);
+  osszPenzSpan.innerHTML=`${osszPenz.toString()} ${savedCurrency}`;
 }
 
 function kosarDict():void{
