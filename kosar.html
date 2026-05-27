@@ -22,12 +22,16 @@
               <img src="src/assets/homeicon.png" alt="home" class="w-10">
             </div>
           </a>
-          <a href="#">
-            <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
-              <h1>Kapcsolat</h1>
-              <img src="src/assets/contacticon.png" alt="home" class="w-10">
-            </div>
-          </a>
+              <div>
+               <form>
+                  <select id="currency" class="px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+                    <option value="HUF">HUF Ft</option>
+                    <option value="USD">USD $</option>
+                    <option value="EUR">EUR €</option>
+                    <option value="GBP">GBP £</option>
+                  </select>
+                </form>
+             </div>
           <a href="kosar.html">
             <div class="cursor-pointer border-2 rounded-4xl mx-6 hover:bg-[#36a87b]">
               <img src="src/assets/cart.png" alt="Kosár" class="w-12">
@@ -51,9 +55,17 @@
         <div class="flex flex-col text-center justify-end" id="kosarban">
           <!-- Ide jön a kosaras dolgok! -->
         </div>
+        <div class="flex flex-row justify-center gap-10" >
+          <div class="text-5xl " ><b>Összesen:</b> <span id="osszPenz"></span> Ft</div>
+        </div>
       </div>
     </div>
-    <div></div>
+    <div class="flex justify-center items-center ">
+      <div class="flex border-4 m-3 p-3 rounded-3xl bg-red-600 cursor-pointer" id="torlesBTN">
+        <div class="flex justify-center gap-10" >
+          <div class="text-5xl font-bold text-white">Törlés</div>
+        </div>
+    </div>
     <script type="module" src="/src/kosar.ts"></script>
 </body>
 </html>

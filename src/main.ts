@@ -1,30 +1,15 @@
 import './style.css';
 import data from './data.ts';
 import { Album } from './album.ts';
-
-const currencySLC: HTMLSelectElement = document.querySelector(
-  '#currency',
-) as HTMLSelectElement;
-const currencySLCBurgered: HTMLSelectElement = document.querySelector(
-  '#currency2',
-) as HTMLSelectElement;
-const sortingSLC: HTMLSelectElement = document.querySelector(
-  '#sorting',
-) as HTMLSelectElement;
+const currencySLC: HTMLSelectElement = document.querySelector('#currency') as HTMLSelectElement;
+const currencySLCBurgered: HTMLSelectElement = document.querySelector('#currency2') as HTMLSelectElement;
+const sortingSLC: HTMLSelectElement = document.querySelector('#sorting') as HTMLSelectElement;
 const albumok: Album[] = Album.LoadData(data);
-const burgerBtn = document.querySelector(
-  '#burgerBtn',
-) as HTMLButtonElement | null;
-const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
-const albumTB: HTMLTableElement = document.querySelector(
-  '#tablazatBody',
-) as HTMLTableElement;
-const searchBTN: HTMLDivElement = document.querySelector(
-  '#searchBTN',
-) as HTMLDivElement;
-const searchTXB: HTMLInputElement = document.querySelector(
-  '#search',
-) as HTMLInputElement;
+const burgerBtn : HTMLButtonElement = document.querySelector('#burgerBtn') as HTMLButtonElement;
+const flexBtns: HTMLDivElement = document.querySelector('#flexBtns') as HTMLDivElement;
+const albumTB: HTMLTableElement = document.querySelector('#tablazatBody') as HTMLTableElement;
+const searchBTN: HTMLDivElement = document.querySelector('#searchBTN') as HTMLDivElement;
+const searchTXB: HTMLInputElement = document.querySelector('#search') as HTMLInputElement;
 let isIn: boolean = false;
 let selectedCurrency: string = 'HUF';
 let writtenCurrency: string = 'Ft';
@@ -33,6 +18,11 @@ let searchedList: Album[] = [];
 let isSorted: boolean = false;
 let isSearched: boolean = false;
 let kosarList: Album[] = [];
+
+
+window.addEventListener('storage', ()=>{
+  window.location.reload();
+})
 
 const savedKosar = localStorage.getItem('kosar');
 if (!savedKosar) {
