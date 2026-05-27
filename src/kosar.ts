@@ -9,6 +9,7 @@ const burgerBtn = document.querySelector(
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
 let isIn: boolean = false;
 let kosarList: Album[] = [];
+let kosarTartalom: Map<string, number> = new Map([]);
 
 const savedKosar = localStorage.getItem('kosar');
 if (!savedKosar) {
@@ -17,7 +18,13 @@ if (!savedKosar) {
   kosarList = JSON.parse(savedKosar) as Album[];
 }
 
-kosarFeltolt()
+window.addEventListener('storage', ()=>{
+  kosarDict();
+  // kosarFeltolt();
+  window.location.reload();
+})
+kosarDict();
+// kosarFeltolt();
 
 const szoveg = `
           <div class="flex justify-end mx-8 mb-2"> <!-- Kosár gomb -->
@@ -72,13 +79,36 @@ if (!burgerBtn || !flexBtns) {
   });
 
 }
-  function kosarFeltolt(): void {
-    kosarList.forEach(k => {
-      const div = document.createElement('div');
-      div.innerHTML = `          <div class="flex flex-row justify-center gap-10" id="kosarban">
-              <div class="text-5xl font-bold">${k.record_name}</div>
-            </div>`;
-      kosarDiv.appendChild(div);
+function kosarFeltolt(): void {
+  kosarDiv.innerHTML='';
+  kosarTartalom.forEach((value,key)=>{
+    kosarList.forEach(a => {
+      let currentIndex: number;
+      if(a.record_name==key){
+        
+      }
     });
-  }
+    const div = document.createElement('div');
+    div.innerHTML = `<div class="flex flex-row justify-center gap-10" id="kosarban">
+                    <div class="text-2xl">${value} db ${key}</div>
+                    </div>`;
+    kosarDiv.appendChild(div);
+  })
+}
+
+function kosarDict():void{
+  kosarList.forEach(k =>{
+    const current = kosarTartalom.get(k.record_name);
+    if (kosarTartalom.has(k.record_name)) {
+      kosarTartalom.set(k.record_name,current+1);
+      console.log(kosarTartalom.get(k.record_name));
+      console.log(`${k.record_name} +1`);
+    }
+    else{
+      kosarTartalom.set(k.record_name,1);
+      console.log(`${k.record_name} hozzáadva`);
+    }
+  })
+  kosarFeltolt();
+}
 
