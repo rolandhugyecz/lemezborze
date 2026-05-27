@@ -1,6 +1,11 @@
 import './style.css';
 import data from './data.ts';
+<<<<<<< HEAD:src/kiadas.ts
+=======
+import { Album } from './album.ts';
+>>>>>>> f112ff59c084fc0f5db708a7ea827bbea46901b9:src/kosar.ts
 
+const kosarDiv:HTMLDivElement = document.querySelector("#kosarban") as HTMLDivElement;
 const burgerBtn = document.querySelector(
   '#burgerBtn',
 ) as HTMLButtonElement | null;
@@ -14,6 +19,16 @@ const kiadURL: HTMLInputElement = document.querySelector('#kiadURL') as HTMLInpu
 const kiadasBTN: HTMLDivElement = document.querySelector('#kiadasBTN') as HTMLDivElement;
 const torlesBTN: HTMLDivElement = document.querySelector('#torlesBTN') as HTMLDivElement;
 let isIn: boolean = false;
+let kosarList: Album[] = [];
+
+const savedKosar = localStorage.getItem('kosar');
+if (!savedKosar) {
+  console.log('Nincs kosár!');
+} else {
+  kosarList = JSON.parse(savedKosar) as Album[];
+}
+
+kosarFeltolt()
 
 const szoveg = `
           <div class="flex justify-end mx-8 mb-2"> <!-- Kosár gomb -->
@@ -66,4 +81,19 @@ if (!burgerBtn || !flexBtns) {
     }
     console.log('changed');
   });
+<<<<<<< HEAD:src/kiadas.ts
 }
+=======
+
+}
+  function kosarFeltolt(): void {
+    kosarList.forEach(k => {
+      const div = document.createElement('div');
+      div.innerHTML = `          <div class="flex flex-row justify-center gap-10" id="kosarban">
+              <div class="text-5xl font-bold">${k.record_name}</div>
+            </div>`;
+      kosarDiv.appendChild(div);
+    });
+  }
+
+>>>>>>> f112ff59c084fc0f5db708a7ea827bbea46901b9:src/kosar.ts

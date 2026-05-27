@@ -28,7 +28,9 @@ class Album {
       k.addEventListener("click", () => {
         kList.push(list[index]);
         console.log(`${list[index].artist} added`);
+        localStorage.setItem('kosar', JSON.stringify(kList))
       });
+      
     }
   }
   static PriceConvert(price: number, currency: string) {

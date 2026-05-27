@@ -6,8 +6,14 @@ const currencySLC: HTMLSelectElement = document.querySelector('#currency') as HT
 const currencySLCBurgered: HTMLSelectElement = document.querySelector('#currency2') as HTMLSelectElement;
 const sortingSLC: HTMLSelectElement = document.querySelector('#sorting') as HTMLSelectElement;
 const albumok: Album[] = Album.LoadData(data);
+<<<<<<< HEAD
 const kosarList: Album[] = [];
 const burgerBtn = document.querySelector('#burgerBtn') as HTMLButtonElement | null;
+=======
+const burgerBtn = document.querySelector(
+  '#burgerBtn',
+) as HTMLButtonElement | null;
+>>>>>>> f112ff59c084fc0f5db708a7ea827bbea46901b9
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
 const albumTB: HTMLTableElement = document.querySelector('#tablazatBody') as HTMLTableElement;
 const searchBTN: HTMLDivElement = document.querySelector('#searchBTN') as HTMLDivElement;const searchTXB: HTMLInputElement = document.querySelector('#search') as HTMLInputElement;
@@ -18,6 +24,15 @@ let sortedList: Album[] = [...albumok];
 let searchedList: Album[] = [];
 let isSorted: boolean = false;
 let isSearched: boolean = false;
+let kosarList: Album[] = [];
+
+const savedKosar = localStorage.getItem('kosar');
+if (!savedKosar) {
+  console.log('Nincs kosár!');
+} else {
+  kosarList = JSON.parse(savedKosar) as Album[];
+}
+
 
 searchBTN.addEventListener('click', () => {
   searchedList = [];

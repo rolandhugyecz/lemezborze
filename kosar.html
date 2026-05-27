@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kosár</title>
+</head>
+<body>
+  <nav class="bg-[#26C485] rounded-2xl m-2.5 sticky top-0 z-10">
+      <div class="h-22 flex items-center justify-between text-white text-xl font-bold">
+        <a href="index.html">
+          <div class="px-4 flex items-center gap-4"> <!-- Logo -->
+            <img src="/src/assets/logo.png" alt="Logo" class="w-15 h-15">
+            <h1 class="text-2xl font-bold text-gray-100">Lemezbörze</h1>
+          </div>
+        </a>
+        <div class="hidden md:flex px-4 items-center gap-4"> <!-- Gombok -->
+          <a href="index.html">
+            <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
+              <h1 id="Home">Kezdőlap</h1>
+              <img src="src/assets/homeicon.png" alt="home" class="w-10">
+            </div>
+          </a>
+          <a href="#">
+            <div class="px-4 flex items-center gap-2 rounded-2xl hover:bg-[#36a87b]">
+              <h1>Kapcsolat</h1>
+              <img src="src/assets/contacticon.png" alt="home" class="w-10">
+            </div>
+          </a>
+          <a href="kosar.html">
+            <div class="cursor-pointer border-2 rounded-4xl mx-6 hover:bg-[#36a87b]">
+              <img src="src/assets/cart.png" alt="Kosár" class="w-12">
+            </div></a>
+        </div>
+          <button type="button" class="mt-10 mb-10 mr-10 ml-3 cursor-pointer md:hidden" id="burgerBtn">
+            <img src="src/assets/burger.png" alt="burgericon" class="w-15 h-15" id="burger">
+          </button>
+        </div>
+      </div>
+      <div class="flex md:hidden text-white text-xl font-bold justify-end text-right"> <!-- Flex Gombok -->
+          <div id="flexBtns" class=" mr-5">
+          </div>
+        </div>
+    </nav>
+    <div class="flex justify-center items-center ">
+      <div class="flex flex-col border-2 w-[60%] m-10 p-3 rounded-2xl bg-[#A3E7FC]">
+        <div class="flex flex-col text-center justify-end">
+          <div class="flex flex-row justify-center gap-10" id="kosarban">
+            <div class="text-5xl font-bold">Kosárban:</div>
+          </div>
+          <!-- Ide jön a kosaras dolgok! -->
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/kosar.ts"></script>
+</body>
+</html>
