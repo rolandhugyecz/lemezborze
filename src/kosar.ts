@@ -1,23 +1,12 @@
 import './style.css';
 import data from './data.ts';
-<<<<<<< HEAD:src/kiadas.ts
-=======
 import { Album } from './album.ts';
->>>>>>> f112ff59c084fc0f5db708a7ea827bbea46901b9:src/kosar.ts
 
 const kosarDiv:HTMLDivElement = document.querySelector("#kosarban") as HTMLDivElement;
 const burgerBtn = document.querySelector(
   '#burgerBtn',
 ) as HTMLButtonElement | null;
 const flexBtns = document.querySelector('#flexBtns') as HTMLDivElement | null;
-const kiadArtist: HTMLInputElement = document.querySelector('#kiadArtist') as HTMLInputElement;
-const kiadTitle: HTMLInputElement = document.querySelector('#kiadTitle') as HTMLInputElement;
-const kiadPublisher: HTMLInputElement = document.querySelector('#kiadPublisher') as HTMLInputElement;
-const kiadYear: HTMLInputElement = document.querySelector('#kiadYear') as HTMLInputElement;
-const kiadPrice: HTMLInputElement = document.querySelector('#kiadPrice') as HTMLInputElement;
-const kiadURL: HTMLInputElement = document.querySelector('#kiadURL') as HTMLInputElement;
-const kiadasBTN: HTMLDivElement = document.querySelector('#kiadasBTN') as HTMLDivElement;
-const torlesBTN: HTMLDivElement = document.querySelector('#torlesBTN') as HTMLDivElement;
 let isIn: boolean = false;
 let kosarList: Album[] = [];
 
@@ -81,9 +70,6 @@ if (!burgerBtn || !flexBtns) {
     }
     console.log('changed');
   });
-<<<<<<< HEAD:src/kiadas.ts
-}
-=======
 
 }
   function kosarFeltolt(): void {
@@ -96,4 +82,3 @@ if (!burgerBtn || !flexBtns) {
     });
   }
 
->>>>>>> f112ff59c084fc0f5db708a7ea827bbea46901b9:src/kosar.ts
