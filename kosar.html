@@ -37,13 +37,24 @@
               <img src="src/assets/cart.png" alt="Kosár" class="w-12">
             </div></a>
         </div>
+                <div class="flex md:hidden justify-between items-center">
+          <form>
+            <select id="currency2" class="px-3 rounded-2xl hover:bg-[#36a87b] py-2.5 bg-[#26C485] border">
+              <option value="HUF">HUF Ft</option>
+              <option value="USD">USD $</option>
+              <option value="EUR">EUR €</option>
+              <option value="GBP">GBP £</option>
+            </select>
+          </form>
+          </div>
           <button type="button" class="mt-10 mb-10 mr-10 ml-3 cursor-pointer md:hidden" id="burgerBtn">
             <img src="src/assets/burger.png" alt="burgericon" class="w-15 h-15" id="burger">
           </button>
         </div>
       </div>
       <div class="flex md:hidden text-white text-xl font-bold justify-end text-right"> <!-- Flex Gombok -->
-          <div id="flexBtns" class=" mr-5">
+          <div id="flexBtns" class="mr-5">
+            
           </div>
         </div>
     </nav>
@@ -56,7 +67,7 @@
           <!-- Ide jön a kosaras dolgok! -->
         </div>
         <div class="flex flex-row justify-center gap-10" >
-          <div class="text-5xl " ><b>Összesen:</b> <span id="osszPenz"></span> Ft</div>
+          <div class="text-5xl " ><b>Összesen:</b> <span id="osszPenz"></span> <span id="curr">Ft</span></div>
         </div>
       </div>
     </div>

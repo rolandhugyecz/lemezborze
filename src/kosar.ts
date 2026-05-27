@@ -1,15 +1,60 @@
 import './style.css';
-import data from './data.ts';
 import { Album } from './album.ts';
 
 const kosarDiv:HTMLDivElement = document.querySelector("#kosarban") as HTMLDivElement;
 const burgerBtn: HTMLButtonElement = document.querySelector('#burgerBtn') as HTMLButtonElement;
 const flexBtns: HTMLDivElement = document.querySelector('#flexBtns') as HTMLDivElement;
+const osszPenzSpan: HTMLSpanElement = document.querySelector('#osszPenz') as HTMLSpanElement;
+const torlesBTN: HTMLDivElement = document.querySelector('#torlesBTN') as HTMLDivElement;
+const currencySLC: HTMLSelectElement = document.querySelector('#currency') as HTMLSelectElement;
+const currencySLCBurgered: HTMLSelectElement = document.querySelector('#currency2') as HTMLSelectElement;
+const curr:HTMLSpanElement = document.querySelector('#curr') as HTMLSpanElement;
 let isIn: boolean = false;
 let kosarList: Album[] = [];
 let kosarTartalom: Map<string, number> = new Map([]);
-const osszPenzSpan: HTMLSpanElement = document.querySelector('#osszPenz') as HTMLSpanElement;
-const torlesBTN: HTMLDivElement = document.querySelector('#torlesBTN') as HTMLDivElement;
+let selectedCurrency: string = 'HUF';
+let writtenCurrency: string = 'Ft';
+
+
+
+if (currencySLCBurgered) {
+  currencySLCBurgered.addEventListener('change', () => {
+    currencyChange(currencySLCBurgered);
+    curr.innerHTML=writtenCurrency;
+    console.log(selectedCurrency);
+    
+  });
+}
+if (currencySLC) {
+  currencySLC.addEventListener('change', () => {
+    currencyChange(currencySLC);
+    curr.innerHTML=writtenCurrency;
+    console.log(selectedCurrency);
+
+  });
+}
+
+
+
+function currencyChange(SLC: HTMLSelectElement) {
+  selectedCurrency = SLC.value;
+  console.log(selectedCurrency);
+  
+  switch (SLC.value) {
+    case 'HUF':
+      writtenCurrency = 'Ft';
+      break;
+    case 'EUR':
+      writtenCurrency = '€';
+      break;
+    case 'GBP':
+      writtenCurrency = '£';
+      break;
+    case 'USD':
+      writtenCurrency = '$';
+      break;
+  }
+}
 
 torlesBTN.addEventListener('click',()=>{
   kosarList=[];
@@ -31,6 +76,7 @@ window.addEventListener('storage', ()=>{
   kosarDict();
   window.location.reload();
 })
+
 kosarDict();
 
 const szoveg = `
@@ -54,6 +100,8 @@ if (!burgerBtn || !flexBtns) {
   console.log('Nincsenek meg!');
 } else {
   burgerBtn.addEventListener('click', () => {
+    console.log("nyom");
+    
     if (!isIn) {
       (document.querySelector('#burger') as HTMLImageElement).src =
         'src/assets/close.png';
@@ -88,7 +136,7 @@ function kosarFeltolt(): void {
     const div = document.createElement('div');
     div.innerHTML = `<div class="flex flex-row justify-center gap-10" id="kosarban">
                     <div class="text-2xl"><b>${value} db </b> ${a.artist}: ${key}</div>
-                    <div class="text-2xl">Ár: ${a.price*value} Ft</div>
+                    <div class="text-2xl">Ár: ${Album.PriceConvert((a.price*value),selectedCurrency)}</div>
                     </div>`;
     kosarDiv.appendChild(div);
     osszPenz += a.price*value;
@@ -97,7 +145,7 @@ function kosarFeltolt(): void {
   })
   
   osszPenzSpan.innerHTML=osszPenz.toString();
-  console.log(`${osszPenz}`);
+  console.log(`${osszPenz} ${writtenCurrency}`);
 }
 
 function kosarDict():void{
@@ -115,5 +163,7 @@ function kosarDict():void{
   })
   kosarFeltolt();
 }
+
+
 
 export default torlesBTN;
